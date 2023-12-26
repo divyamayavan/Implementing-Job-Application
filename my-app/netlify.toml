@@ -1,0 +1,5 @@
+[build]
+  base = "/"
+  publish = "/build/"
+  functions = "backend/"
+  command = "npm run build"
