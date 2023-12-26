@@ -1,12 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ApplicationForm = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const jobId = searchParams.get('jobId');
-
+  const { jobId } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -18,20 +15,20 @@ const ApplicationForm = () => {
 
     // Create a FormData object to send files
     const formData = new FormData();
+    formData.append('jobId', jobId);
     formData.append('name', name);
     formData.append('email', email);
-    formData.append('phone', phone);
+    formData.append('phoneNumber', phone);
     formData.append('resume', selectedFile);
     formData.append('coverLetter', coverLetter);
 
     try {
-      // Make a POST request to your backend API endpoint
-      const response = await fetch('http://localhost:3000/api/apply', {
+      // POST request to backend API endpoint
+      const response = await fetch('http://localhost:3000/api/submit-application', {
         method: 'POST',
         body: formData,
       });
-
-      // Handle the response as needed
+      
       if (response.ok) {
         alert('Application submitted successfully!');
       } else {
@@ -42,8 +39,8 @@ const ApplicationForm = () => {
       alert('An error occurred. Please try again later.');
     }
   };
-  
-  
+
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   }
@@ -63,21 +60,27 @@ const ApplicationForm = () => {
   const handleCoverLetterChange = (event) => {
     setCoverLetter(event.target.value);
   }
-  
-return (
+
+  return (
     <>
-      <div>
+      <div className='JobDisplay'>
         <div>
           <h1 className='Application-Form'>Application Form</h1>
         </div>
-        <div>
+        <div className='job-details-content'>
           <form onSubmit={handleSubmit} className='form'>
+            <input
+              type="hidden"
+              value={jobId}
+            />
+
             <label>
               <input
                 placeholder='Enter Your Name'
                 type="text"
                 value={name}
                 onChange={handleNameChange}
+                required
               />
             </label><br></br>
 
@@ -87,6 +90,7 @@ return (
                 type="text"
                 value={email}
                 onChange={handleEmailChange}
+                required
               />
             </label><br></br>
 
@@ -94,8 +98,10 @@ return (
               <input
                 placeholder='Phone No'
                 type="text"
+                name="phoneNumber"
                 value={phone}
                 onChange={handlePhoneChange}
+                required
               />
             </label><br></br>
 
