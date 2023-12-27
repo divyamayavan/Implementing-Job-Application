@@ -1,5 +1,5 @@
 [build]
-  base = "/"
-  publish = "/build/"
-  functions = "backend/"
-  command = "npm run build"
+  base = my-app
+  publish = my-app//build/
+  functions = my-app/backend/
+  command = npm run build
