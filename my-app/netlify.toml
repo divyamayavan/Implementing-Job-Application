@@ -3,4 +3,5 @@
   publish = "my-app/build/"
   functions = "my-app/backend/"
   command = "npm run build"
-   timeout = 4096
+  
+

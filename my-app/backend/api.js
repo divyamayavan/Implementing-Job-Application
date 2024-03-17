@@ -7,6 +7,9 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 require("dotenv").config();
 var cors = require('cors');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 
 //database connection 
@@ -112,6 +115,116 @@ const jobApplicationSchema = new mongoose.Schema({
 });
 
 const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
+
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+});
+
+const User = mongoose.model('User', userSchema);
+
+userSchema.pre('save', async function(next) {
+  const user = this;
+  if (!user.isModified('password')) return next();
+
+  try {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword;
+    next();
+  } catch (error) {
+    return next(error);
+  }
+});
+
+// Login endpoint
+app.post('/api/login', [
+  check('email').isEmail().withMessage('Invalid email address'),
+  check('password').notEmpty().withMessage('Password is required'),
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+
+    res.json({ token, userId: user._id, username: user.username });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Signup endpoint
+app.post('/api/signup', [
+  check('name').notEmpty().withMessage('Name is required'),
+  check('email').isEmail().withMessage('Invalid email address'),
+  check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+  check('confirmPassword').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Passwords do not match');
+    }
+    return true;
+  }),
+  check('phone').isNumeric().withMessage('Invalid phone number'),
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, email, password, phone } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'User already exists with this email' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      phone,
+    });
+    await newUser.save();
+    res.json({ success: true, message: 'User registered successfully' });
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 // API endpoints
