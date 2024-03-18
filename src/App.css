@@ -1,0 +1,301 @@
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-container {
+  background-image: url("https://www.bhmpics.com/downloads/white-and-purple-background/15.360_f_303562524_qfnwiptuffydgbr0adca0wj0pzujfw2w.jpg");
+  height: 95vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.landing-content{
+  margin-bottom: 20%;
+  text-align: center;
+  margin-left: 100px;
+}
+
+.land-bg {
+  background-image: url("https://storage.googleapis.com/joblist-content/hero-images/WFH.png");
+  width: 400px;
+  height: 300px;
+  margin-left: 200px;
+  margin-bottom: 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  align-items: center;
+}
+
+
+.landing-content button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5%;
+  width: 180px;
+}
+
+.landing-content button:hover {
+  background-color: #2980b9;
+}
+
+.login-container {
+  background-color: lightgrey;
+  width: 200px;
+  border: 15px solid rgba(137, 43, 226, 0.781);
+  padding: 60px;
+  margin-left:600px;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.login-container input {
+  width: 200px;
+  height: 20px;
+}
+
+.login-button{
+  background-color: green;
+}
+
+.nav-container {
+  margin-top: 20px; 
+  align-self: flex-end;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li:last-child {
+  margin-right: 0;
+}
+
+.home-heading{
+  text-align: center;
+  padding: 2%;
+}
+
+.home-head-bg{
+  background-color:blueviolet;
+  padding: 1%;
+  text-align: center;
+  margin-top: 0%;
+}
+
+.cards{
+  display: flex;
+  flex-direction: row;
+  margin:5%;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 300px;
+  height: 300px;
+  margin-right: 5%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.card1-image{
+  background-image: url("https://english.cdn.zeenews.com/sites/default/files/2017/05/02/591321-logo-new.jpg");
+  height: 35%;
+  width: 35%;
+  margin-left: 15%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card2-image{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS05mlIZ6PAgWBWUcXKrA8zJZipUZU_bZbfoI82h6Qnj8IvvUu8xPSZ-NddXXM8KCZ3By8&usqp=CAU");
+  height: 35%;
+  width: 35%;
+  margin-left: 15%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card3-image{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHbm7gBCA7yyBdjHhg_tkH06StzvVoebbUCA&usqp=CAU");
+  height: 35%;
+  width: 65%;
+  margin-left: 15%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card4-image{
+  background-image: url("data:image/jpeg;base64,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");
+  height: 35%;
+  width: 55%;
+  margin-left: 15%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.view{
+  margin-left: 8%;
+  color:green;
+}
+
+
+.form{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 5%;
+}
+/* 
+.submit{
+  width: 80px;
+} */
+
+.Application-Form{
+  text-align: center;
+  background-color: blueviolet;
+  padding: 1%;
+  margin-top: 0%;
+  padding-left: 10%;
+}
+ 
+.Job-Details-heading{
+  padding-left: 33%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  background-color: blueviolet;
+  width: 1870px;
+  margin: 0%;
+}
+
+.JobDisplay{
+ background-image: url("https://www.bhmpics.com/downloads/white-and-purple-background/15.360_f_303562524_qfnwiptuffydgbr0adca0wj0pzujfw2w.jpg");
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+ height: 98vh;
+}
+
+.job-details-content{
+  background-color: lightgrey;
+  width: 500px;
+  border: 15px solid rgba(137, 43, 226, 0.781);
+  padding: 50px;
+  margin-left:500px;
+  margin-top: 40px;
+ height: 200px;
+}
+
+.description{
+  text-align: justify;
+}
+
+.apply-link{
+  color: green;
+}
+
+.submit{
+  background-color: rgba(0, 128, 0, 0.544);
+}
+
+.main{
+  background-image: url("https://www.bhmpics.com/downloads/white-and-purple-background/15.360_f_303562524_qfnwiptuffydgbr0adca0wj0pzujfw2w.jpg");
+  background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+ height: 95vh;
+}
+
+.container-1{
+  margin: 50px auto;
+  padding: 2rem 1rem;
+  width: 390px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  text-align: center;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+h1{
+  margin-bottom: 1.2rem;
+  font-size: 2rem;
+  color: #07001f;
+}
+form input{
+  width: 92%;
+  outline: none;
+  padding: 1px solid #fff;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  background: #e4e4e4;
+}
+button{
+  width: 90%;
+  border: none;
+  font-size: 1rem;
+  margin-top: 1.8rem;
+  padding: 10px 0;
+  border-radius: 20px;
+  outline: none;
+  color: #fff;
+  background: rgb(17, 67, 143);
+}
+button:hover{
+  background: rgba(17, 107, 143, 0.8);
+}
+input:focus{
+  border: 1px solid rgb(192, 192, 192);
+}
+.terms{
+  margin-top: 0.2rem;
+}
+.terms input{
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+}
+.terms a{
+  text-decoration: none;
+}
+.member{
+  font-size: 1rem;
+  margin-top: 1.4rem;
+  color: #636363;
+}
+.member a{
+  text-decoration: none;
+}
+.recover{
+  text-align: right;
+  margin: 0.3rem 1.4rem 0 0;
+}
+.recover a{
+  text-decoration: none;
+}
